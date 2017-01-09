@@ -112,6 +112,11 @@ describe('universityStudent, library and book classes', function() {
         undergraduate.should.have.property('borrowedBooksCount');
       });
 
+      it("the student should respond to methods borrowFromLibrary and returnToLibrary", function() {
+        postgraduate.should.respondTo('borrowFromLibrary');
+        postgraduate.should.respondTo('returnToLibrary');
+      });
+
     });
 
     describe("create a postgraduateStudent with name and matric number", function() {
