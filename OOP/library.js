@@ -22,13 +22,14 @@ class undergraduateStudent extends universityStudent {
 
 	borrowFromLibrary(libraryInstance, bookInstance) {
 		if (libraryInstance.type = "research") {
-			return "Hey pal, this is a research library. Research libraries are for PG students"
+			return "Hey pal, this is a research library. Research libraries are for PG students";
 		}
 		if (this.borrowedBooksCount!=3) {
 			if(bookInstance.libraryRefNo in libraryInstance.books) {
 				this.borrowedBooks[bookInstance.libraryRefNo] = bookInstance;
 				this.borrowedBooksCount+=1;
-				libraryInstance.removeBook(bookInstance)
+				libraryInstance.removeBook(bookInstance);
+			}
 		}
 		else {
 			return "You can only borrow 3 books from the library";
@@ -58,7 +59,7 @@ class postgraduateStudent extends universityStudent {
 class library {
 	constructor(books, type) {
 		this.books = {};
-		this.type = [];
+		this.type;
 	}
 
 	addBook(bookInstance, libraryRefNo) {
@@ -79,3 +80,11 @@ class book {
 		this.pageNo = pageNo;
 	}
 }
+
+module.exports = {
+	universityStudent: universityStudent,
+	library: library,
+	book: book,
+	postgraduateStudent: postgraduateStudent,
+	undergraduateStudent: undergraduateStudent
+};
