@@ -47,4 +47,26 @@ describe('universityStudent, library and book classes', function() {
 
   });
 
+  describe("create a library with books and type attribute", function() {
+
+    it("the library should be of type `object` and an instance of the library class", function() {
+      let library = new classes.library('general');
+      library.should.be.an('object');
+      library.should.be.an.instanceof(classes.library);
+    });
+
+    it('the library should have properties `addBook` and `removeBook`', function() {
+      let library = new classes.library('general');
+      library.should.have.property('addBook');
+      library.should.have.property('removeBook');
+    });
+
+    it('the library should respond to methods `addBook` and `removeBook`', function() {
+      let library = new classes.library('general');
+      library.should.respondTo('addBook');
+      library.should.respondTo('removeBook');
+    });
+
+  });
+
 });
