@@ -57,9 +57,9 @@ class postgraduateStudent extends universityStudent {
 }
 
 class library {
-	constructor(books, type) {
+	constructor(type, books) {
 		this.books = {};
-		this.type;
+		this.type = type;
 	}
 
 	addBook(bookInstance, libraryRefNo) {
