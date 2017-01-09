@@ -68,7 +68,7 @@ class library {
 	}
 
 	removeBook(bookInstance) {
-		delete this.book[bookInstance.libraryRefNo];
+		delete this.books[bookInstance.libraryRefNo];
 	}
 }
 

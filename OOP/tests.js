@@ -69,4 +69,26 @@ describe('universityStudent, library and book classes', function() {
 
   });
 
+  describe("creates a library, add books to it and remove books from it", function() {
+
+    let library = new classes.library('general');
+    let book1 = new classes.book('Things fall apart', 'Chinua Achebe', 'fiction', 234);
+    let book2 = new classes.book("The trials of Brother Jero", "Wole Soyinka", "fiction", 304)
+
+    it("the addBook method should take a book and add it to the library with a refNo", function() {
+      library.addBook(book1, 'L1');
+      expect(library.books).to.be.eql({'L1':book1});
+      library.addBook(book2, 'L2');
+      expect(library.books).to.be.eql({'L1':book1,'L2':book2});
+    });
+
+    it("the removeBook method should take a book and remove it from the library", function() {
+      library.removeBook(book1);
+      expect(library.books).to.be.eql({'L2':book2});
+      library.removeBook(book2);
+      expect(library.books).to.be.empty;
+    });
+
+  });
+
 });
