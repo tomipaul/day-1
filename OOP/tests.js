@@ -113,8 +113,8 @@ describe('universityStudent, library and book classes', function() {
       });
 
       it("the student should respond to methods borrowFromLibrary and returnToLibrary", function() {
-        postgraduate.should.respondTo('borrowFromLibrary');
-        postgraduate.should.respondTo('returnToLibrary');
+        undergraduate.should.respondTo('borrowFromLibrary');
+        undergraduate.should.respondTo('returnToLibrary');
       });
 
     });
