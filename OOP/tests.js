@@ -73,18 +73,18 @@ describe('universityStudent, library and book classes', function() {
 
     let library = new classes.library('general');
     let book1 = new classes.book('Things fall apart', 'Chinua Achebe', 'fiction', 234);
-    let book2 = new classes.book("The trials of Brother Jero", "Wole Soyinka", "fiction", 304)
+    let book2 = new classes.book("The trials of Brother Jero", "Wole Soyinka", "fiction", 304);
 
     it("the addBook method should take a book and add it to the library with a refNo", function() {
       library.addBook(book1, 'L1');
-      expect(library.books).to.be.eql({'L1':book1});
+      expect(library.books).to.eql({'L1':book1});
       library.addBook(book2, 'L2');
-      expect(library.books).to.be.eql({'L1':book1,'L2':book2});
+      expect(library.books).to.eql({'L1':book1,'L2':book2});
     });
 
     it("the removeBook method should take a book and remove it from the library", function() {
       library.removeBook(book1);
-      expect(library.books).to.be.eql({'L2':book2});
+      expect(library.books).to.eql({'L2':book2});
       library.removeBook(book2);
       expect(library.books).to.be.empty;
     });
@@ -142,6 +142,61 @@ describe('universityStudent, library and book classes', function() {
         postgraduate.should.respondTo('borrowFromLibrary');
         postgraduate.should.respondTo('returnToLibrary');
       });
+
+    });
+
+  });
+  
+  describe("the borrowFromLibrary and returnToLibrary methods of the undergraduateStudent and postgraduateStudent", function() {
+
+    let book1 = new classes.book('Things fall apart', 'Chinua Achebe', 'fiction', 234);
+    let book2 = new classes.book("The trials of Brother Jero", "Wole Soyinka", "fiction", 304);
+    let book3 = new classes.book("Arrow of God","Chinua Achebe","fiction",443);
+    let book4 = new classes.book("Anthills of the savannah","Chinua Achebe","fiction",322);
+    let book5 = new classes.book("No longer at ease","Chinua Achebe","fiction",299);
+    let book6 = new classes.book("There was a country", 'Chinua Achebe','fiction', 313);
+
+    let library1 = new classes.library("general");
+    let library2 = new classes.library("research");
+
+    let undergraduate = new classes.undergraduateStudent('Tomi Paul', 19870);
+    let postgraduate = new classes.postgraduateStudent('Thomas Paul', 1808);
+
+    library1.addBook(book1, 'L1');
+    library1.addBook(book2, 'L2');
+    library1.addBook(book3, 'L3');
+    library1.addBook(book4, 'L4');
+    library1.addBook(book5, 'L5');
+
+    library2.addBook(book1, 'L1');
+
+    it("should return error message when undergraduate tries to borrow from research library", function() {
+      expect(undergraduate.borrowFromLibrary(library2, book1)).to.equal("Hey pal, this is a research library. Research libraries are for PG students");
+    });
+
+    it("should return error message when undergraduate tries to borrow more than 3 books", function() {
+      undergraduate.borrowFromLibrary(library1, book1);
+      undergraduate.borrowFromLibrary(library1, book2);
+      undergraduate.borrowFromLibrary(library1, book3);
+      expect(library1.books).to.eql({'L4':book4, 'L5':book5});
+      expect(undergraduate.borrowedBooks).to.eql({'L1':book1, 'L2':book2, 'L3':book3});
+
+      expect(undergraduate.borrowFromLibrary(library1, book4)).to.equal("You can only borrow 3 books from the library");
+    });
+
+    it("should return error message when postgraduate tries to borrow more than 5 books", function() {
+      library2.addBook(book2, 'L2');
+      library2.addBook(book3, 'L3');
+      library2.addBook(book4, 'L4');
+      library2.addBook(book5, 'L5');
+      library2.addBook(book6, 'L6');
+      postgraduate.borrowFromLibrary(library2, book1);
+      postgraduate.borrowFromLibrary(library2, book2);
+      postgraduate.borrowFromLibrary(library2, book3);
+      postgraduate.borrowFromLibrary(library2, book4);
+      postgraduate.borrowFromLibrary(library2, book5);
+
+      expect(postgraduate.borrowFromLibrary(library2, book6)).to.equal("You can only borrow 5 books from the library");
 
     });
 

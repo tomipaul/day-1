@@ -21,7 +21,7 @@ class undergraduateStudent extends universityStudent {
 	}
 
 	borrowFromLibrary(libraryInstance, bookInstance) {
-		if (libraryInstance.type = "research") {
+		if (libraryInstance.type == "research") {
 			return "Hey pal, this is a research library. Research libraries are for PG students";
 		}
 		if (this.borrowedBooksCount!=3) {
