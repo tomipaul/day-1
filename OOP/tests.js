@@ -3,7 +3,7 @@ var assert = chai.assert;
 var expect = chai.expect;
 var should = chai.should();
 
-var classes = require('./library2.js')
+var classes = require('./library.js')
 
 describe('universityStudent, library and book classes', function() {
 
@@ -25,6 +25,24 @@ describe('universityStudent, library and book classes', function() {
       let student = new classes.universityStudent('Fred Rohn', 5421);
       expect(student).to.have.property('borrowedBooks');
       expect(student).to.have.property('borrowedBooksCount');
+    });
+
+  });
+
+  describe("create a book with a name, author, category and pageNo", function() {
+
+    it("the book should be of type `object` and an instance of the book class", function() {
+      let book = new classes.book('Things fall apart', 'Chinua Achebe', 'fiction', 234);
+      book.should.be.an('object');
+      book.should.be.an.instanceof(classes.book);
+    });
+
+    it("the name, author, category and pageNo should be properties of the book", function() {
+      let book = new classes.book("The trials of Brother Jero", "Wole Soyinka", "fiction", 304);
+      book.name.should.equal('The trials of Brother Jero');
+      book.author.should.equal('Wole Soyinka');
+      book.category.should.equal('fiction');
+      book.pageNo.should.equal(304);
     });
 
   });
