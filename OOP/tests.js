@@ -91,4 +91,55 @@ describe('universityStudent, library and book classes', function() {
 
   });
 
+  describe("undergraduateStudent and postgraduateStudent subclasses of universityStudent", function() {
+
+    describe("create an undergraduateStudent with name and matric number", function() {
+      let undergraduate = new classes.undergraduateStudent('Tomi Paul', 19870);
+
+      it("undergraduate should be of type `object` and an instance of the universityStudent and undergraduateStudent class", function() {
+        undergraduate.should.be.an('object');
+        undergraduate.should.be.an.instanceof(classes.universityStudent);
+        undergraduate.should.be.an.instanceof(classes.undergraduateStudent);
+      });
+
+      it("the student name and matric number should be a property of the student", function() {
+        undergraduate.name.should.equal('Tomi Paul');
+        undergraduate.matricNo.should.equal(19870);
+      });
+
+      it("the student should have properties `borrowedBooks` and `borrowedBooksCount`", function() {
+        undergraduate.should.have.property('borrowedBooks');
+        undergraduate.should.have.property('borrowedBooksCount');
+      });
+
+    });
+
+    describe("create a postgraduateStudent with name and matric number", function() {
+      let postgraduate = new classes.postgraduateStudent('Thomas Paul', 1808);
+
+      it("undergraduate should be of type `object` and an instance of the universityStudent and undergraduateStudent class", function() {
+        postgraduate.should.be.an('object');
+        postgraduate.should.be.an.instanceof(classes.universityStudent);
+        postgraduate.should.be.an.instanceof(classes.postgraduateStudent);
+      });
+
+      it("the student name and matric number should be a property of the student", function() {
+        postgraduate.name.should.equal('Thomas Paul');
+        postgraduate.matricNo.should.equal(1808);
+      });
+
+      it("the student should have properties `borrowedBooks` and `borrowedBooksCount`", function() {
+        postgraduate.should.have.property('borrowedBooks');
+        postgraduate.should.have.property('borrowedBooksCount');
+      });
+
+      it("the student should respond to methods borrowFromLibrary and returnToLibrary", function() {
+        postgraduate.should.respondTo('borrowFromLibrary');
+        postgraduate.should.respondTo('returnToLibrary');
+      });
+
+    });
+
+  });
+
 });
